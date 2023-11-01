@@ -6,6 +6,8 @@ import { CV, languageSchema, level } from "../schemas/CVSchema";
 import { TextInput } from "./Inputs";
 
 export function Languages() {
+  const info = useCVStore((state) => state);
+  console.log(info);
   const defaultValues = useCVStore((state) => state.languages);
   const setExperience = useCVStore((state) => state.setLanguages);
   const {

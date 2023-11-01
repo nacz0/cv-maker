@@ -74,7 +74,7 @@ export const languageSchema = z.object({
 export const consentForPersonalDataProcessingSchema = z
   .object({
     text: z.string().optional(),
-    company: z.string().nonempty(),
+    company: z.string().optional(),
   })
   .superRefine(({ company, text }, ctx) => {
     if (
@@ -104,6 +104,13 @@ export const certificateSchema = z.object({
   ),
 });
 
+export const skillsSchema = z.object({
+  skills: z.array(z.object({ text: z.string().nonempty() })),
+});
+export const hobbiesSchema = z.object({
+  hobbies: z.array(z.object({ text: z.string().nonempty() })),
+});
+
 export const aboutSchema = z.object({
   text: z.string().max(1000).nullish(),
 });
@@ -113,8 +120,8 @@ export const CVSchema = z.object({
   experience: experienceSchema,
   certificates: certificateSchema,
   languages: languageSchema,
-  skills: z.array(z.string().nonempty()),
-  hobbies: z.array(z.string().nonempty()),
+  skills: skillsSchema,
+  hobbies: hobbiesSchema,
   about: aboutSchema,
   consentForPersonalDataProcessing: consentForPersonalDataProcessingSchema,
 });

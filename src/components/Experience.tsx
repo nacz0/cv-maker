@@ -6,18 +6,21 @@ import { CV, experienceSchema } from "../schemas/CVSchema";
 import { MonthInput, TextInput } from "./Inputs";
 
 export function Experience() {
+  const info = useCVStore((state) => state);
+  console.log(info);
   const defaultValues = useCVStore((state) => state.experience);
   const setExperience = useCVStore((state) => state.setExperience);
   const {
     register,
     handleSubmit,
     control,
+
     formState: { errors },
   } = useForm<CV["experience"]>({
     resolver: zodResolver(experienceSchema),
     defaultValues: defaultValues,
   });
-  const { fields } = useFieldArray({
+  const { fields, append } = useFieldArray({
     control,
     name: "experience",
   });
@@ -68,6 +71,20 @@ export function Experience() {
         );
       })}
       <button type="submit">Submit</button>
+      <button
+        onClick={() =>
+          append({
+            startDate: "",
+            company: "",
+            position: "",
+            localization: "",
+            endDate: "",
+            description: "",
+          })
+        }
+      >
+        Append
+      </button>
     </form>
   );
 }

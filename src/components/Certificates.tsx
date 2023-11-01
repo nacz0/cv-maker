@@ -17,7 +17,7 @@ export function Certificates() {
     resolver: zodResolver(certificateSchema),
     defaultValues: defaultValues,
   });
-  const { fields } = useFieldArray({
+  const { fields, append } = useFieldArray({
     control,
     name: "certificates",
   });
@@ -58,6 +58,18 @@ export function Certificates() {
         );
       })}
       <button type="submit">Submit</button>
+      <button
+        onClick={() =>
+          append({
+            name: "",
+            date: "",
+            organization: "",
+            description: "",
+          })
+        }
+      >
+        Append
+      </button>
     </form>
   );
 }

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { CV } from "./schemas/CVSchema";
 
-interface CVState {
+export interface CVState {
   personal: CV["personalInfo"];
   about: CV["about"];
   education: CV["education"];
@@ -34,7 +34,7 @@ export const useCVStore = create<CVState>((set) => ({
     dateOfBirth: null,
     image: "",
   },
-  about: "",
+  about: { text: "" },
   education: {
     education: [],
   },
@@ -44,8 +44,8 @@ export const useCVStore = create<CVState>((set) => ({
   languages: {
     languages: [],
   },
-  skills: [],
-  hobbies: [],
+  skills: { skills: [] },
+  hobbies: { hobbies: [] },
   certificates: {
     certificates: [],
   },
